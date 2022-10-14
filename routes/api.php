@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/signup', [AuthController::class, 'sign_up']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/pets', [PetController::class, 'index'])->name('pets');
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
