@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PetController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// posts routes
+Route::post('/signup', [AuthController::class, 'sign_up']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('posts', PostController::class);
-    Route::get('/posts/search/{title}', [PostController::class, 'search']);
-    Route::get('/post/author/{id}', [PostController::class, 'get_author']);
+    Route::get('/pets', [PetController::class, 'index'])->name('pets');
 });
